@@ -1,11 +1,16 @@
 package com.patrickchow.sprintchallengemapsmenussounds
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -56,11 +61,58 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         when(item.itemId){
             R.id.marker -> {
                 Toast.makeText(this, "Marker Placed", Toast.LENGTH_SHORT).show()
+
+                val latLng = mMap.cameraPosition.target
+                mMap.addMarker(MarkerOptions().position(latLng).title("Pin"))
             }
             R.id.current_location -> {
                 Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show()
+                requestPermission()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    //Request for permission for location
+    fun requestPermission(){
+        ActivityCompat
+            .requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                111)
+    }
+
+    // If permission is okay, move to the current location of device
+    fun getCurrentLocation() {
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED) {
+
+            val locationProvider = LocationServices.getFusedLocationProviderClient(this)
+
+            // Listener here because getting location takes time
+            locationProvider.lastLocation.addOnSuccessListener {
+                if (it != null) {
+                    val latLng = LatLng(it.latitude, it.longitude)
+
+                    //Moves the camera
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+
+                    //Places a mark on the location
+                    mMap.addMarker(MarkerOptions().position(latLng).title("Your Location"))
+                }
+            }
+
+        }
+    }
+
+    // If request is okay, move camera to getCurrentLocation()
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 111) {
+            getCurrentLocation()
+        }
     }
 }
