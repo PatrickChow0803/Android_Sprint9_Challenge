@@ -54,6 +54,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        mMap.setOnMapLongClickListener {
+            mMap.addMarker(MarkerOptions().position(it).title("${it.latitude}, ${it.longitude}"))
+            player.start()
+        }
     }
 
     // Inflates the menu_sign and place it to the top right
