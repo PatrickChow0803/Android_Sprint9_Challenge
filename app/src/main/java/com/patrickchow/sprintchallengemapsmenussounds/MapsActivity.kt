@@ -97,7 +97,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
 
                     //Places a mark on the location
-                    mMap.addMarker(MarkerOptions().position(latLng).title("Your Location"))
+                    mMap.addMarker(MarkerOptions().position(latLng).title("Location"))
                 }
             }
 
