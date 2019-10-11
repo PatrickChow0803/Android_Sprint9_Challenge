@@ -2,6 +2,9 @@ package com.patrickchow.sprintchallengemapsmenussounds
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -22,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var player: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +34,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        player = MediaPlayer.create(this, R.raw.zapsplat_horror_accent_metal_scrape_dark_processed_scary_001_39922)
     }
 
     /**
@@ -64,6 +70,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 val latLng = mMap.cameraPosition.target
                 mMap.addMarker(MarkerOptions().position(latLng).title("Pin"))
+
+                player.start()
             }
             R.id.current_location -> {
                 Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show()
