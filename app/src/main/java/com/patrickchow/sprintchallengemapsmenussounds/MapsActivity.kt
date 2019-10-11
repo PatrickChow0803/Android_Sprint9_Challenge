@@ -2,6 +2,10 @@ package com.patrickchow.sprintchallengemapsmenussounds
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -39,5 +43,24 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    }
+
+    // Inflates the menu_sign and place it to the top right
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_icons, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    // Gives the item selected functionality
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.marker -> {
+                Toast.makeText(this, "Marker Placed", Toast.LENGTH_SHORT).show()
+            }
+            R.id.current_location -> {
+                Toast.makeText(this, "Current Location", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

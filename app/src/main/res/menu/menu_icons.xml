@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_tag_faces_black_24dp"
         android:title="Marker"
         app:showAsAction="ifRoom" />
-    
+
     <item
         android:id="@+id/current_location"
         android:icon="@drawable/ic_map_black_24dp"
