@@ -14,7 +14,9 @@ You have *3 hours*, and you should work *independently* — looking things up (s
 
 Good luck!
 
+
 ## Screen Recording
+
 
 There is a screen recording in this repo which previews the look and feel of a completed project that meets the MVP requirements for this project.
 
@@ -22,10 +24,13 @@ This is an example showing how two views can look different when using different
 
 ## Requirements
 
-Build a Map activity that has actions in the action bar to center the map on the user's current location and one to place a pin in the center of the screen. When a pin is placed, an audio effect will be played.
+Build a Map activity that has actions in the action bar to center the map on the user's
+ current location and one to place a pin in the center of the screen. When a pin is placed, 
+ an audio effect will be played.
 
 * Use toolbar actions to allow for adding pins and centering on the user
-* Use a mediaplayer to play an audio track when pin is dropped (this could be from a resource directory, the file system, or from the internet)
+* Use a mediaplayer to play an audio track when pin is dropped (this could be from a resource directory,
+ the file system, or from the internet)
 
 ## Stretch Goals
 * Allow a user to set the audio effect and save that persistently
